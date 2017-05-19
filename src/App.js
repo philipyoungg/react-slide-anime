@@ -8,7 +8,7 @@ const Slide = styled.div`
   width: 100%;
   height: 100vh;
   top: 0;
-  opacity: ${p => (p.offset ? p.offset / 10 : 0)}
+  opacity: ${p => (p.offset ? p.offset / p.totalSlide : 0)}
   left: ${p => (p.offset ? (p.offset - 1) * 100 : 0)}%
   background: ${p => (p.color ? p.color : "red")};
 `;
@@ -26,7 +26,9 @@ class App extends Component {
           translateX={[0, `-${(totalSlide - 1) * 100}vw`]}
         >
           <div>
-            {range(1, totalSlide + 1).map(i => <Slide offset={i} />)}
+            {range(1, totalSlide + 1).map(i => (
+              <Slide offset={i} total={totalSlide} />
+            ))}
           </div>
         </Anime>
       </div>
